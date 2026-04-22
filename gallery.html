@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="base-path" content="">
+<title>Gallery – CME Detailing | Our Work</title>
+<meta name="description" content="Browse our gallery of car detailing, ceramic coatings, PPF and graphene coating work across South West Sydney, Southern Highlands and Wollondilly.">
+<link rel="stylesheet" href="css/styles.css">
+<style>
+/* Gallery filter tabs */
+.filter-tabs {
+  display: flex; gap: 0.5rem; flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+}
+.filter-tab {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--silver);
+  padding: 0.5rem 1.2rem;
+  border-radius: 3px;
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.filter-tab:hover,
+.filter-tab.active { background: var(--blue); border-color: var(--blue); color: #fff; }
+
+/* Main gallery grid */
+.gallery-main {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  min-height: 400px;
+}
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  background: var(--card);
+}
+.gallery-item.tall { grid-row: span 2; }
+.gallery-item.wide { grid-column: span 2; }
+.gallery-item img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  aspect-ratio: 1;
+  transition: transform 0.4s ease, filter 0.3s;
+}
+.gallery-item.tall img,
+.gallery-item.wide img { aspect-ratio: auto; min-height: 200px; }
+.gallery-item:hover img { transform: scale(1.05); filter: brightness(1.08); }
+.gallery-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%);
+  opacity: 0; transition: opacity 0.3s;
+  display: flex; align-items: flex-end; padding: 1rem;
+}
+.gallery-item:hover .gallery-overlay { opacity: 1; }
+.gallery-caption {
+  font-family: var(--font-ui);
+  font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(255,255,255,0.9);
+}
+
+/* Upload zone */
+.upload-zone {
+  border: 2px dashed rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 3rem 2rem;
+  text-align: center;
+  transition: all var(--transition);
+  cursor: pointer;
+  margin-top: 3rem;
+}
+.upload-zone:hover,
+.upload-zone.dragover { border-color: var(--blue); background: var(--blue-dim); }
+.upload-zone svg { width: 48px; height: 48px; stroke: var(--muted); fill: none; margin: 0 auto 1rem; display: block; transition: stroke var(--transition); }
+.upload-zone:hover svg { stroke: var(--blue); }
+.upload-zone h4 { font-family: var(--font-ui); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--silver); margin-bottom: 0.4rem; }
+.upload-zone p { color: var(--muted); font-size: 0.8rem; font-weight: 300; }
+.upload-zone input { display: none; }
+.upload-zone .upload-trigger { color: var(--blue); cursor: pointer; }
+
+/* Lightbox */
+.lightbox {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.96);
+  z-index: 9500;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; visibility: hidden; transition: all 0.3s;
+}
+.lightbox.open { opacity: 1; visibility: visible; }
+.lightbox-inner { position: relative; max-width: 92vw; max-height: 90vh; }
+.lightbox-inner img { max-width: 100%; max-height: 88vh; object-fit: contain; border-radius: 4px; display: block; }
+.lightbox-close {
+  position: fixed; top: 1.5rem; right: 1.5rem;
+  background: rgba(255,255,255,0.1); border: none; color: var(--white);
+  font-size: 1.5rem; cursor: pointer; border-radius: 50%;
+  width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
+  transition: background var(--transition);
+}
+.lightbox-close:hover { background: var(--blue); }
+.lightbox-caption {
+  text-align: center; margin-top: 1rem;
+  font-family: var(--font-ui); font-size: 0.7rem; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
+}
+
+@media (max-width: 900px) { .gallery-main { grid-template-columns: repeat(3, 1fr); } .gallery-item.wide { grid-column: span 1; } }
+@media (max-width: 600px) { .gallery-main { grid-template-columns: repeat(2, 1fr); } .gallery-item.tall { grid-row: span 1; } }
+</style>
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<!-- Page Hero -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb"><a href="index.html">Home</a> / <span>Gallery</span></div>
+    <div class="eyebrow">Our Portfolio</div>
+    <h1>WITNESS THE<br>DIFFERENCE</h1>
+    <p style="color:var(--silver);font-weight:300;max-width:500px;margin-top:1rem;font-size:1rem;">Real results from real vehicles — every photo is a CME Detailing transformation.</p>
+  </div>
+</div>
+
+<!-- Gallery Section -->
+<section class="section" style="background:var(--black);">
+
+  <!-- Filter Tabs -->
+  <div class="filter-tabs reveal" id="filter-tabs">
+    <button class="filter-tab active" data-filter="all">All Work</button>
+    <button class="filter-tab" data-filter="ceramic">Ceramic Coating</button>
+    <button class="filter-tab" data-filter="ppf">PPF</button>
+    <button class="filter-tab" data-filter="exterior">Exterior Detail</button>
+    <button class="filter-tab" data-filter="graphene">Graphene</button>
+    <button class="filter-tab" data-filter="truck">Trucks</button>
+  </div>
+
+  <!-- Gallery Grid -->
+  <div class="gallery-main reveal" id="gallery-grid">
+    <div class="gallery-item tall" data-cat="exterior" onclick="openLightbox('https://img1.wsimg.com/isteam/ip/4abb6422-16a4-4fb6-9f89-6c8798108b68/_A7I8406.jpg','Slammed FG Falcon – Exterior Detailing, Mittagong')">
+      <img src="https://img1.wsimg.com/isteam/ip/4abb6422-16a4-4fb6-9f89-6c8798108b68/_A7I8406.jpg" alt="FG Falcon Exterior Detailing Mittagong" loading="lazy">
+      <div class="gallery-overlay"><span class="gallery-caption">FG Falcon — Exterior Detail</span></div>
+    </div>
+    <div class="gallery-item" data-cat="exterior" onclick="openLightbox('https://img1.wsimg.com/isteam/ip/4abb6422-16a4-4fb6-9f89-6c8798108b68/20251027_131040.jpg','Ford Falcon – Freshly Detailed, Mittagong')">
+      <img src="https://img1.wsimg.com/isteam/ip/4abb6422-16a4-4fb6-9f89-6c8798108b68/20251027_131040.jpg" alt="Ford Falcon Mittagong" loading="lazy">
+      <div class="gallery-overlay"><span class="gallery-caption">Ford Falcon — Detail</span></div>
+    </div>
+    <div class="gallery-item" data-cat="ceramic" onclick="openLightbox('https://img1.wsimg.com/isteam/ip/4abb6422-16a4-4fb6-9f89-6c8798108b68/20250907_141704.jpg','Ceramic Coating – Bowral')">
+      <img src="https://img1.wsimg.com/isteam/ip/4abb6422-16a4-4fb6-9f89-6c8798108b68/20250907_141704.jpg" alt="Ceramic Coating Bowral" loading="lazy">
+      <div class="gallery-overlay"><span class="gallery-caption">Ceramic Coating — Bowral</span></div>
+    </div>
+    <div class="gallery-item" data-cat="exterior" onclick="openLightbox('https://img1.wsimg.com/isteam/ip/4abb6422-16a4-4fb6-9f89-6c8798108b68/20250925_110525.jpg','Paint Correction – Southern Highlands')">
+      <img src="https://img1.wsimg.com/isteam/ip/4abb6422-16a4-4fb6-9f89-6c8798108b68/20250925_110525.jpg" alt="Paint Correction Southern Highlands" loading="lazy">
+      <div class="gallery-overlay"><span class="gallery-caption">Paint Correction</span></div>
+    </div>
+    <div class="gallery-item wide" data-cat="truck" onclick="openLightbox('https://img1.wsimg.com/isteam/ip/4abb6422-16a4-4fb6-9f89-6c8798108b68/20251007_145730.jpg','Mobile Truck Detailing – Southern Highlands')">
+      <img src="https://img1.wsimg.com/isteam/ip/4abb6422-16a4-4fb6-9f89-6c8798108b68/20251007_145730.jpg" alt="Mobile Truck Detailing Southern Highlands" loading="lazy" style="aspect-ratio:2/1;">
+      <div class="gallery-overlay"><span class="gallery-caption">Truck Detail — Southern Highlands</span></div>
+    </div>
+    <div class="gallery-item" data-cat="graphene truck" onclick="openLightbox('https://img1.wsimg.com/isteam/ip/4abb6422-16a4-4fb6-9f89-6c8798108b68/20251101_163621.jpg','Graphene & Ceramic Truck Coatings')">
+      <img src="https://img1.wsimg.com/isteam/ip/4abb6422-16a4-4fb6-9f89-6c8798108b68/20251101_163621.jpg" alt="Graphene Ceramic Truck Coatings" loading="lazy">
+      <div class="gallery-overlay"><span class="gallery-caption">Graphene Coating — Truck</span></div>
+    </div>
+    <div class="gallery-item tall" data-cat="exterior" onclick="openLightbox('https://img1.wsimg.com/isteam/ip/4abb6422-16a4-4fb6-9f89-6c8798108b68/_A7I8461.jpg','Interior & Exterior Detail – Southern Highlands')">
+      <img src="https://img1.wsimg.com/isteam/ip/4abb6422-16a4-4fb6-9f89-6c8798108b68/_A7I8461.jpg" alt="Interior Exterior Southern Highlands" loading="lazy">
+      <div class="gallery-overlay"><span class="gallery-caption">Full Detail — Southern Highlands</span></div>
+    </div>
+    <div class="gallery-item" data-cat="ceramic" onclick="openLightbox('https://img1.wsimg.com/isteam/ip/4abb6422-16a4-4fb6-9f89-6c8798108b68/20250923_151547-9c6a34e.jpg','Ceramic Coating – Wollondilly')">
+      <img src="https://img1.wsimg.com/isteam/ip/4abb6422-16a4-4fb6-9f89-6c8798108b68/20250923_151547-9c6a34e.jpg" alt="Ceramic Coating Wollondilly" loading="lazy">
+      <div class="gallery-overlay"><span class="gallery-caption">Ceramic — Wollondilly</span></div>
+    </div>
+    <div class="gallery-item" data-cat="exterior" onclick="openLightbox('https://img1.wsimg.com/isteam/ip/4abb6422-16a4-4fb6-9f89-6c8798108b68/20250924_114951.jpg','Paint Correction – Picton')">
+      <img src="https://img1.wsimg.com/isteam/ip/4abb6422-16a4-4fb6-9f89-6c8798108b68/20250924_114951.jpg" alt="Paint Correction Picton" loading="lazy">
+      <div class="gallery-overlay"><span class="gallery-caption">Paint Correction — Picton</span></div>
+    </div>
+    <div class="gallery-item" data-cat="graphene" onclick="openLightbox('https://img1.wsimg.com/isteam/ip/4abb6422-16a4-4fb6-9f89-6c8798108b68/20250924_114930.jpg','Graphene Coating – Wollondilly')">
+      <img src="https://img1.wsimg.com/isteam/ip/4abb6422-16a4-4fb6-9f89-6c8798108b68/20250924_114930.jpg" alt="Graphene Coatings Wollondilly" loading="lazy">
+      <div class="gallery-overlay"><span class="gallery-caption">Graphene — Wollondilly</span></div>
+    </div>
+    <div class="gallery-item" data-cat="exterior" onclick="openLightbox('https://img1.wsimg.com/isteam/ip/4abb6422-16a4-4fb6-9f89-6c8798108b68/20251027_130919-76cd9c1.jpg','Mobile Detail – Wollondilly')">
+      <img src="https://img1.wsimg.com/isteam/ip/4abb6422-16a4-4fb6-9f89-6c8798108b68/20251027_130919-76cd9c1.jpg" alt="Mobile Detailing Wollondilly" loading="lazy">
+      <div class="gallery-overlay"><span class="gallery-caption">Mobile Detail — Wollondilly</span></div>
+    </div>
+    <div class="gallery-item" data-cat="exterior" onclick="openLightbox('https://img1.wsimg.com/isteam/ip/4abb6422-16a4-4fb6-9f89-6c8798108b68/20250923_151637.jpg','Interior & Exterior – Wollondilly')">
+      <img src="https://img1.wsimg.com/isteam/ip/4abb6422-16a4-4fb6-9f89-6c8798108b68/20250923_151637.jpg" alt="Exterior Detailing Wollondilly" loading="lazy">
+      <div class="gallery-overlay"><span class="gallery-caption">Full Detail — Wollondilly</span></div>
+    </div>
+    <div class="gallery-item" data-cat="ceramic" onclick="openLightbox('https://img1.wsimg.com/isteam/ip/4abb6422-16a4-4fb6-9f89-6c8798108b68/20251104_174942.jpg','Ceramic Coating – Camden')">
+      <img src="https://img1.wsimg.com/isteam/ip/4abb6422-16a4-4fb6-9f89-6c8798108b68/20251104_174942.jpg" alt="Ceramic Coating Camden" loading="lazy">
+      <div class="gallery-overlay"><span class="gallery-caption">Ceramic — Camden</span></div>
+    </div>
+    <div class="gallery-item" data-cat="exterior" onclick="openLightbox('https://img1.wsimg.com/isteam/ip/4abb6422-16a4-4fb6-9f89-6c8798108b68/20251104_174827.jpg','Interior & Exterior – South West Sydney')">
+      <img src="https://img1.wsimg.com/isteam/ip/4abb6422-16a4-4fb6-9f89-6c8798108b68/20251104_174827.jpg" alt="Interior Exterior South West Sydney" loading="lazy">
+      <div class="gallery-overlay"><span class="gallery-caption">Full Detail — SWS</span></div>
+    </div>
+    <div class="gallery-item truck" data-cat="truck" onclick="openLightbox('https://img1.wsimg.com/isteam/ip/4abb6422-16a4-4fb6-9f89-6c8798108b68/20251005_111833.jpg','Truck Paint Correction – South West Sydney')">
+      <img src="https://img1.wsimg.com/isteam/ip/4abb6422-16a4-4fb6-9f89-6c8798108b68/20251005_111833.jpg" alt="Truck Paint Correction South West Sydney" loading="lazy">
+      <div class="gallery-overlay"><span class="gallery-caption">Truck Correction — SWS</span></div>
+    </div>
+    <div class="gallery-item" data-cat="exterior" onclick="openLightbox('https://img1.wsimg.com/isteam/ip/4abb6422-16a4-4fb6-9f89-6c8798108b68/20251104_174834.jpg','Mobile Detail – South West Sydney')">
+      <img src="https://img1.wsimg.com/isteam/ip/4abb6422-16a4-4fb6-9f89-6c8798108b68/20251104_174834.jpg" alt="Mobile Detailing South West Sydney" loading="lazy">
+      <div class="gallery-overlay"><span class="gallery-caption">Mobile — SWS</span></div>
+    </div>
+    <div class="gallery-item" data-cat="exterior" onclick="openLightbox('https://img1.wsimg.com/isteam/ip/4abb6422-16a4-4fb6-9f89-6c8798108b68/20250917_163908.jpg','Car Detailing – Southern Highlands')">
+      <img src="https://img1.wsimg.com/isteam/ip/4abb6422-16a4-4fb6-9f89-6c8798108b68/20250917_163908.jpg" alt="Car Detailing Southern Highlands" loading="lazy">
+      <div class="gallery-overlay"><span class="gallery-caption">Detail — Southern Highlands</span></div>
+    </div>
+    <div class="gallery-item" data-cat="ppf" onclick="openLightbox('https://img1.wsimg.com/isteam/ip/4abb6422-16a4-4fb6-9f89-6c8798108b68/20250903_152752.jpg','PPF – Wollondilly')">
+      <img src="https://img1.wsimg.com/isteam/ip/4abb6422-16a4-4fb6-9f89-6c8798108b68/20250903_152752.jpg" alt="PPF Wollondilly" loading="lazy">
+      <div class="gallery-overlay"><span class="gallery-caption">PPF — Wollondilly</span></div>
+    </div>
+    <div class="gallery-item" data-cat="ppf" onclick="openLightbox('https://img1.wsimg.com/isteam/ip/4abb6422-16a4-4fb6-9f89-6c8798108b68/20250725_142604.jpg','PPF – Bowral')">
+      <img src="https://img1.wsimg.com/isteam/ip/4abb6422-16a4-4fb6-9f89-6c8798108b68/20250725_142604.jpg" alt="PPF Bowral" loading="lazy">
+      <div class="gallery-overlay"><span class="gallery-caption">PPF — Bowral</span></div>
+    </div>
+    <div class="gallery-item" data-cat="exterior" onclick="openLightbox('https://img1.wsimg.com/isteam/ip/4abb6422-16a4-4fb6-9f89-6c8798108b68/20250725_142613.jpg','Luxury Car Detail – Bowral')">
+      <img src="https://img1.wsimg.com/isteam/ip/4abb6422-16a4-4fb6-9f89-6c8798108b68/20250725_142613.jpg" alt="Luxury Car Detailing Bowral" loading="lazy">
+      <div class="gallery-overlay"><span class="gallery-caption">Luxury Detail — Bowral</span></div>
+    </div>
+  </div>
+
+  <!-- Upload Zone -->
+  <div class="upload-zone reveal" id="upload-zone">
+    <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+    <h4>Add Your Own Photos</h4>
+    <p>Drag and drop images here, or <span class="upload-trigger" onclick="document.getElementById('gallery-upload').click()">browse to upload</span></p>
+    <p style="font-size:0.72rem; margin-top:0.4rem;">JPG, PNG, WEBP accepted</p>
+    <input type="file" id="gallery-upload" accept="image/*" multiple>
+  </div>
+
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="if(event.target===this)closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <div class="lightbox-inner">
+    <img id="lightbox-img" src="" alt="">
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+  </div>
+</div>
+
+<div id="site-footer"></div>
+
+<script src="js/components.js"></script>
+<script src="js/main.js"></script>
+<script>
+// Filter
+document.querySelectorAll('.filter-tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    document.querySelectorAll('.gallery-item').forEach(item => {
+      const cat = item.dataset.cat || '';
+      if (filter === 'all' || cat.includes(filter)) {
+        item.style.display = '';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  });
+});
+
+// Upload
+const uploadInput = document.getElementById('gallery-upload');
+const uploadZone = document.getElementById('upload-zone');
+const grid = document.getElementById('gallery-grid');
+
+function addImageToGrid(src, caption) {
+  const item = document.createElement('div');
+  item.className = 'gallery-item';
+  item.dataset.cat = 'upload';
+  item.innerHTML = `<img src="${src}" alt="${caption}" loading="lazy"><div class="gallery-overlay"><span class="gallery-caption">${caption}</span></div>`;
+  item.addEventListener('click', () => openLightbox(src, caption));
+  grid.appendChild(item);
+}
+
+uploadInput.addEventListener('change', e => {
+  Array.from(e.target.files).forEach(file => {
+    const reader = new FileReader();
+    reader.onload = ev => addImageToGrid(ev.target.result, file.name.replace(/\.[^.]+$/, ''));
+    reader.readAsDataURL(file);
+  });
+});
+
+// Drag & Drop
+uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('dragover'); });
+uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('dragover'));
+uploadZone.addEventListener('drop', e => {
+  e.preventDefault(); uploadZone.classList.remove('dragover');
+  Array.from(e.dataTransfer.files).forEach(file => {
+    if (!file.type.startsWith('image/')) return;
+    const reader = new FileReader();
+    reader.onload = ev => addImageToGrid(ev.target.result, file.name.replace(/\.[^.]+$/, ''));
+    reader.readAsDataURL(file);
+  });
+});
+
+// Lightbox
+function openLightbox(src, caption) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox-caption').textContent = caption || '';
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+</script>
+</body>
+</html>
