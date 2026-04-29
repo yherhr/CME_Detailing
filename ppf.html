@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="base-path" content="../">
+<title>Mobile Detailing – CME Detailing | We Come to You</title>
+<meta name="description" content="Mobile car detailing across South West Sydney, Southern Highlands and Wollondilly. We come to your home or work, fully equipped. Call Lucas: 0416 636 310.">
+<link rel="stylesheet" href="../css/styles.css">
+<style>
+.service-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; align-items: start; }
+.service-sidebar { position: sticky; top: 90px; }
+.sidebar-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 2rem; margin-bottom: 1.5rem; }
+.sidebar-card h4 { font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid var(--border); }
+.sidebar-card ul { list-style: none; }
+.sidebar-card ul li { padding: 0.55rem 0; border-bottom: 1px solid var(--border); font-size: 0.85rem; font-weight: 300; color: var(--silver); display: flex; gap: 8px; align-items: flex-start; }
+.sidebar-card ul li:last-child { border-bottom: none; }
+.sidebar-card ul li::before { content: '✓'; color: var(--blue); font-family: var(--font-ui); font-weight: 700; flex-shrink: 0; }
+.sidebar-nav ul { list-style: none; }
+.sidebar-nav ul li a { display: block; padding: 0.6rem 0; border-bottom: 1px solid var(--border); font-family: var(--font-ui); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--silver); transition: color var(--transition); }
+.sidebar-nav ul li a:hover, .sidebar-nav ul li a.current { color: var(--blue); }
+.content-body h2 { font-size: clamp(1.8rem, 3.5vw, 3rem); margin: 2.5rem 0 1rem; }
+.content-body h3 { font-family: var(--font-ui); font-size: 1.05rem; font-weight: 700; margin: 1.6rem 0 0.6rem; }
+.content-body p { color: var(--silver); font-weight: 300; font-size: 0.95rem; line-height: 1.75; margin-bottom: 1rem; }
+.content-body ul { list-style: none; margin: 0.8rem 0 1.2rem; }
+.content-body ul li { color: var(--silver); font-size: 0.93rem; font-weight: 300; padding: 0.35rem 0 0.35rem 1.5rem; position: relative; line-height: 1.6; }
+.content-body ul li::before { content: '→'; position: absolute; left: 0; color: var(--blue); font-family: var(--font-ui); font-size: 0.8rem; }
+.divider-inner { width: 100%; height: 1px; background: var(--border); margin: 2.5rem 0; }
+.steps { display: flex; flex-direction: column; gap: 1rem; margin: 1.5rem 0; }
+.step { display: flex; gap: 1.5rem; align-items: flex-start; background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1.4rem; transition: border-color var(--transition); }
+.step:hover { border-color: var(--blue); }
+.step-num { font-family: var(--font-display); font-size: 2.5rem; color: var(--blue); line-height: 1; flex-shrink: 0; letter-spacing: 0.04em; }
+.step h4 { font-size: 0.95rem; letter-spacing: 0.04em; margin-bottom: 0.3rem; }
+.step p { font-size: 0.83rem; color: var(--muted); font-weight: 300; margin: 0; line-height: 1.6; }
+@media (max-width: 1024px) { .service-layout { grid-template-columns: 1fr; } .service-sidebar { position: static; } }
+</style>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="#">Services</a> / <span>Mobile Detailing</span></div>
+    <div class="eyebrow">We Come to You</div>
+    <h1>MOBILE<br>DETAILING</h1>
+    <p style="color:var(--silver);font-weight:300;max-width:520px;margin-top:1rem;font-size:1rem;">Convenience meets quality — we arrive fully equipped at your home or workplace and transform your vehicle on-site.</p>
+  </div>
+</div>
+<section class="section" style="background:var(--black);">
+  <div class="service-layout">
+    <div class="content-body reveal">
+      <h2>HOW IT WORKS</h2>
+      <div class="steps">
+        <div class="step"><div class="step-num">01</div><div><h4>Book Your Service</h4><p>Call Lucas or fill in our online enquiry form. We'll discuss your vehicle, location, and what service you're after — and provide a quote with no obligation.</p></div></div>
+        <div class="step"><div class="step-num">02</div><div><h4>We Come to You</h4><p>Our fully equipped van arrives at your home or workplace at a time that suits you. We bring everything — water, power, products, and equipment.</p></div></div>
+        <div class="step"><div class="step-num">03</div><div><h4>Transformation</h4><p>We get to work while you go about your day. Whether it's a quick tidy or a full inside-and-out detail, we do the job properly — every single time.</p></div></div>
+        <div class="step"><div class="step-num">04</div><div><h4>Drive Away Impressed</h4><p>Your vehicle is returned to you in immaculate condition. We walk you through what was done and provide aftercare advice to keep it looking great.</p></div></div>
+      </div>
+
+      <div class="divider-inner"></div>
+      <h2>WHAT WE OFFER MOBILE</h2>
+      <ul>
+        <li>Full exterior wash, clay, and polish</li>
+        <li>Interior deep clean — vacuum, steam, leather condition, stain removal</li>
+        <li>Full inside-and-out detail packages</li>
+        <li>Ceramic and graphene coating application</li>
+        <li>Maintenance washes and regular upkeep plans</li>
+        <li>Paint correction (when access and conditions permit)</li>
+      </ul>
+
+      <div class="divider-inner"></div>
+      <h2>SERVICE AREA</h2>
+      <p>We travel across a wide area with no call-out fees, including:</p>
+      <ul>
+        <li>South West Sydney — Camden, Narellan, Campbelltown, Oran Park, Gregory Hills, Leppington and surrounds</li>
+        <li>Southern Highlands — Bowral, Mittagong, Moss Vale, Bundanoon, Robertson and more</li>
+        <li>Wollondilly Shire — Picton, Bargo, Tahmoor, Thirlmere, Wilton and surrounds</li>
+      </ul>
+
+      <div class="divider-inner"></div>
+      <h3>The CME Mobile Advantage</h3>
+      <p>You don't need to take time off work, arrange a drop-off, or wait around at a shopfront. We come to you — fully self-sufficient — so you get a professional-grade result without any hassle. That's the CME Detailing difference.</p>
+    </div>
+    <div class="service-sidebar reveal">
+      <div class="sidebar-card">
+        <h4>Mobile Advantage</h4>
+        <ul>
+          <li>Fully self-sufficient van</li>
+          <li>Come to your home or work</li>
+          <li>No drop-off required</li>
+          <li>All products &amp; equipment included</li>
+          <li>Wide service area</li>
+          <li>Flexible scheduling</li>
+        </ul>
+        <a href="../contact.html" class="btn btn-primary" style="width:100%; justify-content:center; margin-top:1.5rem;">Book Now →</a>
+        <a href="tel:+61416636310" class="btn btn-outline" style="width:100%; justify-content:center; margin-top:0.8rem;">📞 Call Lucas</a>
+      </div>
+      <div class="sidebar-card sidebar-nav">
+        <h4>All Services</h4>
+        <ul>
+          <li><a href="ceramic-coating.html">Ceramic Coating</a></li>
+          <li><a href="ppf.html">Paint Protection Film</a></li>
+          <li><a href="exterior-detailing.html">Exterior Detailing</a></li>
+          <li><a href="interior-detailing.html">Interior Detailing</a></li>
+          <li><a href="mobile-detailing.html" class="current">Mobile Detailing</a></li>
+          <li><a href="graphene-coating.html">Graphene Coating</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<div id="site-footer"></div>
+<script src="../js/components.js"></script>
+<script src="../js/main.js"></script>
+</body>
+</html>
